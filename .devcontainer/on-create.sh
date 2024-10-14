@@ -7,11 +7,23 @@ LC_ALL="en_US.UTF-8"
 
 # Platform config
 PLATFORM=linux
-ARCH=arm64
+ARCH=$(uname -m)
 GOVERSION=go1.23.2
 
+if [[ "$ARCH" == x86_64* ]]; then
+    ARCH="amd64"
+elif [[ "$ARCH" == i*86 ]]; then
+    ARCH="386"
+elif [[ "$ARCH" == arm* ]]; then
+    ARCH="arm"
+elif [[ "$ARCH" == aarch64 ]]; then
+    ARCH="arm64"
+fi
+
+URL="https://go.dev/dl/$GOVERSION.$PLATFORM-$ARCH.tar.gz"
+
 cd /tmp
-curl -L -s "https://go.dev/dl/$GOVERION.$PLATFORM-$ARCH.tar.gz" -o go.tar.gz
+curl -L -s $URL -o go.tar.gz
 sudo tar -C /usr/local -xvzf go.tar.gz
 rm -rf go.tar.gz
 

@@ -1,0 +1,24 @@
+{
+	"name": "go project",
+	"service": "devcontainer",
+	"dockerComposeFile": "docker-compose.yml",
+	"workspaceFolder": "/home/developer/workspace",
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.shell.linux": "/bin/bash"
+			},
+			"extensions": [
+				"golang.Go",
+				"EditorConfig.EditorConfig"
+			]
+		}
+	},
+	"remoteUser": "developer",
+	"forwardPorts": [],
+	"capAdd": [
+		"SYS_PTRACE"
+	],
+	"onCreateCommand": "/on-create.sh",
+	"postCreateCommand": "/post-create.sh"
+}
